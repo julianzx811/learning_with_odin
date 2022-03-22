@@ -1,0 +1,16 @@
+const div = document.querySelector('#divxd');
+div.style.color = 'blue';
+div.style.cssText = 'color: blue; background: white';  
+div.setAttribute('style', 'color: blue; background: purple'); 
+const div2 = document.createElement('div');  
+div2.style.color = 'blue';
+div.appendChild(div2);
+const divsegundo = document.querySelector('#divsegundo');
+const id_div = divsegundo.getAttribute('id');
+divsegundo.setAttribute('class','xd'+id_div);
+//div.removeAttribute('style');
+div.textContent = 'lolxd';
+divsegundo.innerHTML = '<h1>holisxd</h1>';
+// titulo.removeChild(h2);
+// const h3 = document.createElement('h3');
+// titulo.parentNode.appendChild(h3);
