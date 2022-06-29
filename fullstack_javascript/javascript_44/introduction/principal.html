@@ -9,17 +9,26 @@
     <script src="java.js" defer></script>
 </head>
 <body>
+    <h1 id="empty_books"></h1>
     <table id="item1">
     </table>
     <div>
-    <form action="/action_page.php">
+    <form id="formxd">
         <label for="nombre_libro">nombre_libro</label><br>
         <input type="text" id="nombre_libro" name="nombre_libro" ><br>
         <label for="autor"></label>autor<br>
         <input type="text" id="autor" name="autor" ><br><br>
         <label for="Npaginas"></label>numero de paginas<br>
         <input type="number" id="Npaginas" name="Npaginas" ><br><br>
-        <input type="submit" value="añadir libro">
+
+        <div id="selection">
+        <input type="radio" id="readed" name="sera" value="leido">
+        <label for="readed">he leido este libro</label><br>
+        <input type="radio" id="unreaded" name="sera" value="noleido">
+        <label for="unreaded">no he leido este libro</label><br>      
+        </div>
+
+        <input type="button" value="añadir libro" onclick="processdata()">
     </form>
     </div> 
 </body>
