@@ -6,31 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>booksAPP</title>
     <link rel="stylesheet" href="/scss/custom.css">
+    <link rel="stylesheet" href="estile.css">
     <script src="java.js" defer></script>
 </head>
-<body>
+<body class="bg-dark">
     <div class="container">
-    <h1 id="empty_books"></h1>
+    <h1 id="empty_books"class="text-light"></h1>
     <table id="item1">
     </table>
     </div>
-    <div class="container bg-primary">
+    <div class="container bg">
     <form id="formxd">
-        <label for="nombre_libro">nombre_libro</label><br>
+        <label for="nombre_libro" class="text-light">nombre_libro</label><br>
         <input type="text" id="nombre_libro" name="nombre_libro" required><br>
-        <label for="autor"></label>autor<br>
+        <label for="autor"class="text-light">autor</label><br>
         <input type="text" id="autor" name="autor" required><br><br>
-        <label for="Npaginas"></label>numero de paginas<br>
+        <label for="Npaginas"class="text-light">numero de paginas</label><br>
         <input type="number" id="Npaginas" name="Npaginas" required><br><br>
 
         <div id="selection">
         <input type="radio" id="readed" name="sera" value="leido" required>
-        <label for="readed">he leido este libro</label><br>
+        <label for="readed"class="text-light">he leido este libro</label><br>
         <input type="radio" id="unreaded" name="sera" value="noleido">
-        <label for="unreaded">no he leido este libro</label><br>      
+        <label for="unreaded"class="text-light">no he leido este libro</label><br>      
         </div>
 
-        <input type="button" value="añadir libro" onclick="processdata()">
+        <input type="button" value="añadir libro" onclick="processdata()" class="btn btn-success">
     </form>
     </div> 
 </body>

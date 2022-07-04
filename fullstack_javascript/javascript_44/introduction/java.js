@@ -22,13 +22,19 @@ function createTable(){
     const tr1 = document.createElement("tr")
     const th0 = document.createElement("th")
     const th1 = document.createElement("th")
+    th0.textContent = "#"
+    th0.classList.add("text-white")
     th1.textContent = "titulo"
+    th1.classList.add("text-white")
     const th2 = document.createElement("th")
     th2.textContent = "paginas"
+    th2.classList.add("text-white")
     const th3 = document.createElement("th")
     th3.textContent = "autor"
+    th3.classList.add("text-white")
     const th4 = document.createElement("th")
     th4.textContent = "leido?"
+    th4.classList.add("text-white")
     const th5 = document.createElement("th")
     table.appendChild(tr1) 
     tr1.appendChild(th0) 
@@ -43,15 +49,19 @@ function addBookTable(newbook){
   const tr1 = document.createElement("tr")
   const th1 = document.createElement("th")
   th1.textContent = "libro " + (current_book+1)
+  th1.classList.add("text-white")
   tr1.appendChild(th1)
   const th2 = document.createElement("th")
   th2.textContent = newbook.tittle
+  th2.classList.add("text-white")
   tr1.appendChild(th2)
   const th3 = document.createElement("th")
   th3.textContent = newbook.pages
+  th3.classList.add("text-white")
   tr1.appendChild(th3)
   const th4 = document.createElement("th")
   th4.textContent = newbook.author
+  th4.classList.add("text-white")
   tr1.appendChild(th4)
   const th5 = document.createElement("th")
   if (leido[current_book] === 0) {
@@ -60,11 +70,13 @@ function addBookTable(newbook){
   else if(leido[current_book] === 1){
     th5.textContent = "leido" 
   }
+  th5.classList.add("text-white")
   tr1.appendChild(th5)
   const th6 = document.createElement("th")
-  const boton = document.createElement("input")
+  const boton = document.createElement("button")
   boton.type = "button"
-  boton.value = "eliminar libro"
+  boton.textContent= "eliminar libro"
+  boton.classList.add("bg-danger")
   boton.id = current_book
   boton.onclick = function(e) {
     table.removeChild(document.getElementById("tr"+e.target.id))
@@ -93,6 +105,7 @@ if (books.length == 0) {
   document.getElementById("empty_books").textContent = "usted no ha registrado libros"
 }
 
+//get the data from the form
 function processdata(){
   let data = new FormData();
   autor = document.getElementById("autor")
