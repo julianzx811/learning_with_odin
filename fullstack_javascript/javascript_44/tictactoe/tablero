@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-center bg-primary border border-warning" style="margin-left: 500px;margin-right:500px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col border border-warning" style="padding-top: 50px;">
+                    </div>
+                    <div class="col border border-warning" style="padding-top: 50px;">
+                    </div>
+                    <div class="col border border-warning" style="padding-top: 50px;">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col border border-warning" style="padding-top: 50px;">
+                    </div>
+                    <div class="col border border-warning" style="padding-top: 50px;">
+                    </div>
+                    <div class="col border border-warning" style="padding-top: 50px;">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col border border-warning" style="padding-top: 50px;">
+                    </div>
+                    <div class="col border border-warning" style="padding-top: 50px;">
+                    </div>
+                    <div class="col border border-warning" style="padding-top: 50px;">
+                    </div>
+                </div>
+            </div>
+        </div>
