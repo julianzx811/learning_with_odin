@@ -10,7 +10,7 @@ let game = (function () {
         for (let i = 0; i < 3; i++) {
             let divx = document.createElement('div')
             divx.className = "col border border-warning"
-            divx.style = "padding-top: 50px;"
+            divx.style = "padding-top: 40px;"
             divx.id = "column" + column_count.toString()
             column_count++
             div.appendChild(divx)
@@ -25,12 +25,10 @@ let game = (function () {
         }
     }
     function restar_game() {
-        let container = document.getElementById("container")
-        for (let i = 0; i < 3; i++) {
-            container.removeChild(document.getElementById("row" + i.toString()))
+        for (let i = 0; i < 10; i++) {
+            document.getElementById("column" + i.toString()).textContent = ""
+            game_board[i] = 0
         }
-        column_count = 0
-        make_board()
     }
     return {
         make_board: make_board,
@@ -45,33 +43,49 @@ let game_control = (function () {
         this.wins = wins
         this.points = 0
         this.current_text = current_text
+        this.turn = true
     }
     function who_won() {
         console.log(game_board)
         let ganador = document.getElementById("whowon")
         //check first diagonal spot
         if (game_board[0] == game_board[4] && game_board[4] == game_board[8]) {
-            ganador.textContent = document.getElementById("column0").textContent
+            if (game_board[0] == 1 || game_board[0] == 2) {
+                ganador.textContent = document.getElementById("column0").textContent
+                return true
+            }
         }
         //check second diagonal spot
         else if (game_board[2] == game_board[4] && game_board[4] == game_board[6]) {
-            ganador.textContent = document.getElementById("column2").textContent
+            if (game_board[2] == 1 || game_board[2] == 2) {
+                ganador.textContent = document.getElementById("column2").textContent
+                return true
+
+            }
         }
         else {
+            let veredicto = false
             //check vertical spots
             for (let i = 0; i < 3; i++) {
                 if (game_board[i] == game_board[i + 3] && game_board[i + 3] == game_board[i + 6]) {
-                    ganador.textContent = document.getElementById("column"+i.toString()).textContent
-                    i = 3
+                    if (game_board[i] == 1 || game_board[i] == 2) {
+                        ganador.textContent = document.getElementById("column" + i.toString()).textContent
+                        veredicto = true
+                        i = 3
+                    }
                 }
             }
             //check horizontal spots
             for (let i = 0; i < 7; i += 3) {
                 if (game_board[i] == game_board[i + 1] && game_board[i + 1] == game_board[i + 2]) {
-                    ganador.textContent = document.getElementById("column"+i.toString()).textContent
-                    i = 7
+                    if (game_board[i] == 1 || game_board[i] == 2) {
+                        ganador.textContent = document.getElementById("column" + i.toString()).textContent
+                        veredicto = true
+                        i = 7
+                    }
                 }
             }
+            return veredicto
         }
     }
     function spot_Free(spot) {
@@ -102,11 +116,17 @@ let game_control = (function () {
         divs.forEach(
             div => {
                 div.addEventListener('click', e => {
-                    if (spot_Free(e.target.id)) {
+                    if (spot_Free(e.target.id) && jugador.turn == true && pc.turn == true) {
                         e.target.textContent = jugador.current_text;
-                        who_won();
+                        if (who_won()) {
+                            console.log("wtf")
+                            jugador.turn = false
+                        }
                         ai_pc(pc)
-                        who_won();
+                        if (who_won()) {
+                            console.log("wtf1")
+                            pc.turn = false
+                        }
                     }
                 })
             }
