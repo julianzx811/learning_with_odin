@@ -25,7 +25,7 @@ let game = (function () {
         }
     }
     function restar_game() {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 9; i++) {
             document.getElementById("column" + i.toString()).textContent = ""
             game_board[i] = 0
         }
