@@ -1,7 +1,6 @@
 let game_board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 let game = (function () {
-    'use strict';
     let column_count = 0
     function make_row(number) {
         let div = document.createElement('div')
@@ -37,7 +36,7 @@ let game = (function () {
     }
 })();
 
-let game_control = (function () {
+let players = (function () {
     function player(name, wins, current_text) {
         this.name = name
         this.wins = wins
@@ -45,20 +44,27 @@ let game_control = (function () {
         this.current_text = current_text
         this.turn = true
     }
+    return{
+        player: player
+    }
+})();
+
+let game_control = (function () {
+    
     function who_won() {
         console.log(game_board)
         let ganador = document.getElementById("whowon")
         //check first diagonal spot
         if (game_board[0] == game_board[4] && game_board[4] == game_board[8]) {
             if (game_board[0] == 1 || game_board[0] == 2) {
-                ganador.textContent = document.getElementById("column0").textContent
+                ganador.textContent = "el ganador es: " + document.getElementById("column0").textContent
                 return true
             }
         }
         //check second diagonal spot
         else if (game_board[2] == game_board[4] && game_board[4] == game_board[6]) {
             if (game_board[2] == 1 || game_board[2] == 2) {
-                ganador.textContent = document.getElementById("column2").textContent
+                ganador.textContent = "el ganador es: " + document.getElementById("column2").textContent
                 return true
 
             }
@@ -69,7 +75,7 @@ let game_control = (function () {
             for (let i = 0; i < 3; i++) {
                 if (game_board[i] == game_board[i + 3] && game_board[i + 3] == game_board[i + 6]) {
                     if (game_board[i] == 1 || game_board[i] == 2) {
-                        ganador.textContent = document.getElementById("column" + i.toString()).textContent
+                        ganador.textContent = "el ganador es: " + document.getElementById("column" + i.toString()).textContent
                         veredicto = true
                         i = 3
                     }
@@ -79,7 +85,7 @@ let game_control = (function () {
             for (let i = 0; i < 7; i += 3) {
                 if (game_board[i] == game_board[i + 1] && game_board[i + 1] == game_board[i + 2]) {
                     if (game_board[i] == 1 || game_board[i] == 2) {
-                        ganador.textContent = document.getElementById("column" + i.toString()).textContent
+                        ganador.textContent = "el ganador es: " + document.getElementById("column" + i.toString()).textContent
                         veredicto = true
                         i = 7
                     }
@@ -108,10 +114,13 @@ let game_control = (function () {
             }
         }
     }
-    function initiate_game() {
+    function restar_game(pc,jugador){
+        game.restar_game()
+        pc.turn = true
+        jugador.turn = true
+    }
+    function initiate_game(pc,jugador) {
         game.make_board()
-        const jugador = new player("yulian", 0, "x")
-        const pc = new player("computer", 0, "o")
         let divs = document.querySelectorAll('div:not(#aminoxd)')
         divs.forEach(
             div => {
@@ -135,8 +144,11 @@ let game_control = (function () {
 
     return {
         initiate_game: initiate_game,
+        restar_game : restar_game
     }
 })();
 
-game_control.initiate_game()
-let juego = game
+let pc = new players.player("pc",0,"o")
+let jugador = new players.player("pc",0,"x")
+let juego = game_control
+juego.initiate_game(pc,jugador)
