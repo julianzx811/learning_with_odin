@@ -104,28 +104,33 @@ let game_control = (function () {
             return false
         }
     }
+    function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
     function ai_pc(pc) {
         turn_acomplish = false
-        while (turn_acomplish == false) {
-            position = Math.floor(Math.random() * 9)
+        while (turn_acomplish == false && !draw()) {
+            position = getRndInteger(0, 9)
+            console.log(position)
             if (game_board[position] == 0) {
                 document.getElementById("column" + position).textContent = pc.current_text
                 game_board[position] = 2
                 turn_acomplish = true
             }
         }
+        return turn_acomplish
     }
     function restar_game(pc, jugador) {
         game.restar_game()
         pc.turn = true
         jugador.turn = true
     }
-    function draw(){
-        let veredicto = true 
+    function draw() {
+        let veredicto = true
         for (let i = 0; i < game_board.length; i++) {
-           if (game_board[i] == 0 ) {
-            veredicto = false
-           } 
+            if (game_board[i] == 0) {
+                veredicto = false
+            }
         }
         return veredicto
     }
@@ -140,11 +145,19 @@ let game_control = (function () {
                         if (who_won()) {
                             console.log("wtf")
                             jugador.turn = false
-                        }
-                        ai_pc(pc)
-                        if (who_won()) {
-                            console.log("wtf1")
                             pc.turn = false
+                        }
+                        else {
+                            if(!ai_pc(pc)){
+                                document.getElementById("whowon").textContent = "its a draw!!"
+                                pc.turn = false
+                                jugador.turn = false
+                            }
+                            else if (who_won()) {
+                                console.log("wtf1")
+                                pc.turn = false
+                                jugador.turn = false
+                            }
                         }
                     }
                 })
