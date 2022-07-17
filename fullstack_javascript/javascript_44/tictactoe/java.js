@@ -28,6 +28,7 @@ let game = (function () {
             document.getElementById("column" + i.toString()).textContent = ""
             game_board[i] = 0
         }
+        document.getElementById("whowon").textContent = ""
     }
     return {
         make_board: make_board,
@@ -44,13 +45,13 @@ let players = (function () {
         this.current_text = current_text
         this.turn = true
     }
-    return{
+    return {
         player: player
     }
 })();
 
 let game_control = (function () {
-    
+
     function who_won() {
         console.log(game_board)
         let ganador = document.getElementById("whowon")
@@ -114,12 +115,21 @@ let game_control = (function () {
             }
         }
     }
-    function restar_game(pc,jugador){
+    function restar_game(pc, jugador) {
         game.restar_game()
         pc.turn = true
         jugador.turn = true
     }
-    function initiate_game(pc,jugador) {
+    function draw(){
+        let veredicto = true 
+        for (let i = 0; i < game_board.length; i++) {
+           if (game_board[i] == 0 ) {
+            veredicto = false
+           } 
+        }
+        return veredicto
+    }
+    function initiate_game(pc, jugador) {
         game.make_board()
         let divs = document.querySelectorAll('div:not(#aminoxd)')
         divs.forEach(
@@ -144,11 +154,11 @@ let game_control = (function () {
 
     return {
         initiate_game: initiate_game,
-        restar_game : restar_game
+        restar_game: restar_game
     }
 })();
 
-let pc = new players.player("pc",0,"o")
-let jugador = new players.player("pc",0,"x")
+let pc = new players.player("pc", 0, "o")
+let jugador = new players.player("pc", 0, "x")
 let juego = game_control
-juego.initiate_game(pc,jugador)
+juego.initiate_game(pc, jugador)
